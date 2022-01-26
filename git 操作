@@ -1,0 +1,14 @@
+
+
+1.git add XXX   将文件导入缓存区中
+
+2.git push origin -u master 切换分支
+
+3.git  commit XXX 提交文件代码
+
+4.git remote rm origin 删除远程链接
+
+5.git remote add origin XX远程连接
+
+6.git config --global -unset-all XXX设置项
+
