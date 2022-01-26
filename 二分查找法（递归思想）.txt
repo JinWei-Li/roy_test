@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <string.h>
+
+ 
+void quick_sort(int a[],int low,int high)
+{
+    int l = low;
+    int h = high;
+    int middle = a[low];
+   // printf("%d %d %d\n",l,h,middle);
+ 
+    if(low >high)
+        return ;
+    
+    while(l < h)
+    {
+        while(a[h] >= middle && (l<h))
+        h--;
+        a[l] = a[h];
+        
+        while(a[l]<=middle && (l<h))
+        l++;
+        a[h] = a[l];
+    }
+    
+    a[h] = middle;
+  //  printf("f");
+    quick_sort(a,low,l-1);  //左边递归到 high等于 -1.也会退出
+    quick_sort(a,l+1,high);//递归到右边只有一数字时候，low==high 退出
+    
+}
+
+
+int seach_idx(int a[],int low,int high,int find_value)
+{
+    
+    if(low <=high)
+    {
+        int mid = (low+high)/2;
+        if(a[mid] == find_value)
+            return mid;
+
+        else if(a[mid] <find_value)
+            //low = mid+1;
+            return seach_idx(a,mid+1,high,find_value);
+        else
+           // high = mid-1;
+            return seach_idx(a,low,mid-1,find_value);
+    }
+    return -1;
+}
+
+
+
+
+
+int main(int argc, char **argv) {
+ 
+ int find = 43;   
+ 
+ int a[6] ={78,22,43,2,13,53};
+ int length = sizeof(a)/sizeof(a[0]);
+ quick_sort(a,0,length-1);
+ 
+ //printf("ggl%lu\n",sizeof(a)/sizeof(a[0]));
+ for(int i = 0;i<sizeof(a)/sizeof(a[0]);i++)
+ printf("%5d",a[i]);
+ 
+ printf("\n");
+  int result = seach_idx(a,0,length-1,find);
+ if(result != -1)
+ printf("%5d\n",result);
+ else
+ printf("没有找到相关数字\n");
+ 
+ 
+}
