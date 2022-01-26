@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+typedef struct str  
+{
+    char *name;
+    int score;
+}jin;
+
+
+int main(int argc, char **argv) {
+
+    jin temp;
+    jin *test = &temp;
+    jin **big = &test;
+    
+    char a = 'f';
+    char *pc = &a;
+    
+    char **pp = &pc;
+    
+    printf("pp = %d pp = %d\n",test,test+1);
+     printf("pp = %d pp = %d\n",big,big+1);
+  //  struct str *jin;
+ //   jin = malloc(sizeof(struct str));
+    
+//    jin->name =(char *)malloc(sizeof(char));
+    
+  //  strcpy(jin->name,"hajsdhak");
+  //  jin->score = 89;
+    
+  //  printf("pp = %d\n",&a);
+     printf("pp = %d\n",sizeof(jin));
+     printf("test = %d  test = %d\n",pc,pc+1);
+     // printf("pp = %d\n",temp); 
+     printf("temp =%d  temp+1 = %d\n",pp,pp+1); 
+      
+  //  printf("pp = %s\n",jin->name );
+
+}
