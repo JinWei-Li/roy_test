@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct str
+{
+    char *name;
+    int score;
+};
+
+
+int main(int argc, char **argv) {
+
+    struct str *jin;
+    jin = malloc(sizeof(struct str));
+    
+    jin->name =(char *)malloc(sizeof(char));
+    
+    strcpy(jin->name,"hajsdhak");
+    jin->score = 89;
+    
+    printf("pp = %d\n",jin->score );
+    printf("pp = %s\n",jin->name );
+
+}

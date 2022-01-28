@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <string.h>
+
+int a[] = {65,77,345,32,9,79,2};
+
+//取别名p为  // void(*)（）声明类型 p
+typedef void (*p)(int a[],int length,void(*p1)(),int (*q)());//int* a,int first,int second
+
+
+void swap_function(int* a,int first,int second)
+{
+    a[first] ^= a[second];
+    
+    a[second] ^= a[first];
+    
+    a[first] ^= a[second];
+}
+
+
+int compare_callback(int a[],int first,int second)
+{
+    return a[first] > a[second] ? 1:-1;
+}
+
+/***
+函数名：select_function 
+参数： a[]数组，Length数组长度，声明void(*p)()函数类型指针
+返回值：NULL
+函数功能：选择排序
+***/    
+
+void select_function(int a[],int length,void(*p1)(),int (*q)())
+{
+    int i,j;
+    for( i = 0;i<length-1;i++)
+    { 
+        int temp = i;
+        for(j = i+1;j<length;j++)
+        {
+           // if(a[temp]>a[j])//if(q!=1)
+            if(q(a,temp,j) == 1)
+            temp = j;
+        }
+        
+        if(i!=temp)
+        {
+            p1(a,i,temp);
+        }   
+        
+    }
+}
+
+
+/***
+函数名：bubble_sort 
+参数： a[]数组，Length数组长度，声明void(*p)()函数类型指针
+返回值：NULL
+函数功能：冒泡排序
+***/  
+
+
+void bubble_sort(int a[],int length,void(*p1)(),int (*q)())
+{
+    
+    for(int i = 0;i < length-1;i++)
+    {
+        int flag = 1;
+        for(int j = 0;j < length-1-i;j++)
+        {
+          //  if(a[j] < a[j+1])
+             if(q(a,j,j+1) != 1)
+             p1(a,j,j+1);
+             flag = 0;
+        }        
+        if(flag)
+        break;
+    }
+    
+}
+
+int main(int argc, char **argv) {
+ 
+    void (*arrary[3])() = {select_function,bubble_sort};//定义函数指针数组 
+                                                         //存放函数地址  方便菜单功能选择                                                                               
+    p select = arrary[0]; //声明p(函数类型)  指针变量 指向的函数地址
+   // int temp = compare_callback(a,2,1);
+    //printf("%5d\n",temp);
+    
+    select(a,sizeof(a)/sizeof(a[0]),swap_function,compare_callback);//调用函数
+    printf("选择排序\n");
+    for(int i = 0;i< sizeof(a)/sizeof(a[0]);i++)
+    {
+        printf("%5d",a[i]);
+    }
+    
+    p bubble = arrary[1];
+    bubble(a,sizeof(a)/sizeof(a[0]),swap_function,compare_callback);
+    //void (*p)(int a[],int length) = select_function;
+
+    printf("\n冒泡排序\n");
+    for(int i = 0;i< sizeof(a)/sizeof(a[0]);i++)
+    {
+        printf("%5d",a[i]);
+    }
+
+}

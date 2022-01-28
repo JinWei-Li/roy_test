@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int main(int argc, char **argv) {
+
+    int a = 10;
+
+    int temp[] = {32,13,52,13};
+    
+    printf("temp =%d  temp+1 = %d\n",temp,&temp); 
+    
+    printf("temp =%d  temp+1 = %d\n",temp+1,&temp+1); 
+    
+    printf("temp =%d  temp+1 = %d\n",*&temp,*&temp+1);
+    
+    printf("%d\n",*&a);
+ //   printf("temp =%d  temp+1 = %d\n",pp,pp+1); 
+      
+  //  printf("pp = %s\n",jin->name );
+
+}

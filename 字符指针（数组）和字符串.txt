@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+
+
+int main(int argc, char **argv) {
+char a[10];
+
+char b[] = "sdfDFWp6u567uu0EFWpE";//初始化时候 默认给数组b[]
+char *string = "sdfadscvpxovsfwnjzefcdasmlA"; 
+
+strncpy(a,b,9);
+
+a[9] = '\0';
+printf("%s\n",a);
+
+
+//for(int i=0;i<10;i++)
+//{
+    
+    printf("%lu\n",sizeof(string));  
+  
+    printf("%lu\n",strlen(b));  
+    
+      printf("%p\n",b);  
+       printf("%lu",strlen(""));  
+    
+  
+//}
