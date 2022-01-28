@@ -1,0 +1,116 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+#include <stdio.h>
+char * Encrtption(char *buf,int line)
+{
+    int length = strlen(buf);
+    int new_length = length;
+    char *temp = malloc(new_length+1);
+    char *sec  = malloc(new_length+1);
+    char *ps = sec;
+
+    memset(ps,0,new_length);
+
+    memset(temp,0,new_length);
+    if(new_length%line != 0 )
+    new_length =length+line -new_length%line;
+
+
+  //  printf("new_length rree%d\n",new_length);
+  strcpy(temp,buf);
+    for(int i = length; i<new_length;i++)
+    {
+        temp[i] = '^';
+    }
+
+    printf("%s\n",temp);
+    
+       char (*p)[line] =(char (*)[line])temp;   //构造 数组指针 指向拷贝出来的数组
+  //  char (*p)[line] = temp;   //构造 数组指针 指向拷贝出来的数组
+
+
+  #if 0
+      for(int i = 0; i< new_length/line; i++)
+    {
+        for(int j =0;j<line;j++)
+        {
+            
+            *ps= p[j][i];
+             ps++;
+            //  printf("%c",p[i][j]);
+        }
+    }
+  
+  #endif
+
+
+  #if  1
+    for(int x = 0; x< line; x++)
+    {
+        for(int y =0;y<new_length/line;y++)
+        {         *sec++ = p[y][x];
+            //  printf("%c",p[y][x]);
+              // printf("fgh%s",secrect);
+        }
+    }
+     free(temp);
+  #endif
+ // printf("wwkkw%s\n",ps);
+
+     *sec = '\0';
+      // printf("wwkkw%s",ps);
+    return ps;
+
+}
+
+char *decrypt(char *buff,int line)
+{
+    int length = strlen(buff);
+    char *copy = malloc(length+1);
+    
+    strcpy(copy,buff);
+    
+    char *new_space = malloc(length+1);
+    char *temp = new_space;
+    
+    char (*p)[line] = (char (*)[line])copy;
+    
+    for(int i = 0 ;i< line;i++ )
+    {
+        for(int j = 0;j<length/line;j++)
+        {
+            *temp++ = p[j][i];
+        }
+    }
+    
+   // *temp = '\0';
+    while(*(--temp) == '^'); //要先减 否则直接跳出循环
+    *(++temp) = '\0';
+    
+    free(copy);
+    return new_space;
+}
+
+int main(int argc, char **argv) {
+
+    char *message = "roy is coming";
+    printf("%ld\n",strlen(message));
+    
+    /************加密**********/
+    char *secrect = Encrtption(message,3);
+    printf("%s\n",secrect);
+    
+    /****** *解密***********/
+     char *key = decrypt(secrect,5);
+  //   while(--key == 0)
+    printf("%s\n",key);
+
+}
+
+
+            
+
+    
+    
+    

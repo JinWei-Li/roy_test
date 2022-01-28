@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int array[] = {175,30,97,53,2,98,4,46};
+
+
+void swap(int first[],int num,int end)
+{
+    int temp;
+    temp = first[num];
+    first[num] = first[end];
+    first[end]= temp;
+  //  printf("first%d\n",first);
+  //  printf("second%d\n",second);
+    
+}
+
+
+
+
+
+int main(int argc, char **argv) {
+    int i,j;
+    int temp;
+    int a = 5, b = 3;
+
+  //  swap(&a,&b);
+  //  swap(array,4);
+    
+    
+    printf("a = %d\n",a);
+    printf("b = %d\n",b);
+    
+     #if 1
+     for(i = 0;i< sizeof(array)/sizeof(array[0])-1; i++)
+     {
+         for( j = i+1 ;j<  sizeof(array)/sizeof(array[0]) ; j++)
+         {
+           if(array[i]> array[j])
+           {
+               //temp = array[i];
+              // array[i] = array[j];j
+              // array[j] = temp;
+              
+               swap(array,i,j);
+               
+             //  swap_cp(array[i],array[j]);
+           // swap(a[i],a[j]);
+          }
+         // printf("\n");
+         }
+     }
+     #endif
+     
+     for(i = 0; i < sizeof(array)/sizeof(array[0]); i++)
+     {
+         printf("%5d\t",array[i]);
+         
+     }
+}
+4eeeiouituighjgjwerwe

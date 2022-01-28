@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define A = 89
+const int a = 5;
+
+
+char* simulation(char *Des,const char *Source)
+{
+    char *Temp = Des;
+    while((*Des++ = *Source++));
+    return Temp;
+}
+
+
+int main(int argc, char **argv) {
+    int b = a;
+    const char* str_roy = "sdfFJALF";
+    char* beautifule = malloc(strlen(str_roy)+1);
+    simulation(beautifule,str_roy);
+//	int **temp = 0;
+//	 printf("%p\n",&temp);
+//	test_raw(&temp);
+	printf("%s\n",beautifule);
+	printf("Hello, World!%d\n",b);
+	
+	free(beautifule);
+}

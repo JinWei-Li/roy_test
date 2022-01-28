@@ -1,0 +1,29 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+#include <stdio.h>
+
+void multi_return(int* sum,int* diff, int a,int b)
+{
+     *sum = a + b;
+     *diff = a - b;
+}
+
+
+
+int main(int argc, char **argv) {
+    int big = 9;
+    int small = 3;
+    int add;
+    int reduce;
+    multi_return(&add,&reduce,big,small);
+    
+    printf("first %d second %d",add,reduce);
+}
+
+
+            
+
+    
+    
+

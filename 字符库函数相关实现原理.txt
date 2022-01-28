@@ -1,0 +1,161 @@
+#include <stdio.h>
+#include <string.h>
+
+int my_strlen(const char* a)
+{
+    int i;
+    while(*a++) //'/0'被跳过了
+    i++;
+    return i;
+}
+
+#if 0
+char* my_cpy(char* Des,const char* Source)//返回值为目标的首地址 原因是用于连续拷贝
+{
+    
+  //  while(*(Des++) = *(Source++));
+  char* des_addar = Des;
+  while(*Des++ = *Source++);//把'\0'也复制过去了
+  return des_addar;
+}
+#endif
+
+int my_compare(char* first, char* second)
+{
+  for(;*first&&*second; first++,second++)
+  {
+      if(*first == *second)
+        continue;
+      else
+        return *first - *second;
+  }
+    return *first - *second;
+}
+
+int Test_sprintf()
+{
+    char* buff = malloc(25*sizeof(char));
+    int num1 = 26;
+    int num2 = -43;
+
+    sprintf(buff,"The First number%5dsencond number%5d",num1,num2);//和printf相似 按照格式输出 区别在于输出到字符串中
+    printf("%s\n",buff);
+    free(buff);
+}
+
+
+void test_aoti() //将字符转成整形
+{
+    int temp;
+    char *buff = "   1   2345"; //中间非数字不认，前置空格忽略(认)
+    temp = atoi(buff);
+    printf("%d\n",temp);
+}
+
+void test_itoa()//将整型转成字符
+{
+    int temp = 78529;
+    char buff[20];
+    itoa(temp,buff,2);//第三个参数 为选择存储得进制 ，可以任意的进制
+    printf("%s\n",buff);
+}
+
+
+int my_count_chr(char* buff,char a) //统计字符出现多少次
+{
+    int count = 0;
+    while(*buff++)
+    {
+        if(*buff == a)
+        count++;
+    } 
+
+    return count;
+}
+
+char* my_strchr(char* buff,char a) //字符串里找字符
+{
+    while(*buff++)
+    {
+        if(*buff == a)
+        return buff;
+    } 
+
+    return NULL;
+}
+
+
+
+void test_strchr()
+{
+    char *buff = "roy roy roy is coming";
+    char temp = 'o';
+    char *test_buff;
+    test_buff = my_strchr(buff,temp);//返回第一个找到数字的地址
+    printf("%s\n",test_buff);
+
+}
+
+
+
+
+
+
+
+char* my_strstr( char* source, char* Des)//一堆字符串里找字符串
+{
+    if(*Des == NULL) 
+    return NULL;
+
+    int length = strlen(Des);
+    {
+        while (*source)
+        {
+        // if(*source == *Des) //字符串查找字符串的易写错范例 应该使用strncmp比较
+
+        /***********使用库函数strncmp的方式 会使得函数调用消耗时间*****
+            if(strncmp(source,Des,length) == 0)
+                return source;
+        ********/
+
+
+        /*********自实现方式 不消耗函数调用时间***
+         **********/
+        
+        for(int n = 0;*(source+n)==*(Des+n);n++)
+        {
+            if(*(Des+n+1)=='\0')
+                return source;
+        }
+
+
+            source++;
+        }
+    }
+    printf("no find\n");
+}
+
+
+
+
+int main(int argc, char **argv) {
+    
+char* source_temp ="helzp";
+
+char* source_cpy = "hello";
+
+char temp[1024];
+    
+char a[] = "hello";
+int length = my_strlen(a);
+//printf("%d",length);
+
+int count = my_compare(source_temp,source_cpy);
+printf("gre%d\n",count);
+
+int value = myself();
+printf("%d",value);
+//my_cpy(temp,source_temp);
+//printf("%s",temp);
+
+}

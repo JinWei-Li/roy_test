@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+/一维数组 通过数组的指针构造
+
+void * alloc2D_space(int unitype,int row,int line)
+{
+    return (void *)malloc(sizeof(unitype*row*line));
+}
+
+
+int main(int argc, char **argv) {
+    int row = 1,line = 10;
+    int i,j;
+    //int (*p)[line] = (int (*)[line])alloc2D_space(sizeof(int),row,line);
+      int (*p)[line] = (int (*)[line])malloc(sizeof(sizeof(int)*row*line));
+
+    
+    
+    for (i = 0; i < row; i++ )
+    {
+        for(j = 0;j<line; j++)
+        {
+            p[i][j] = i+j;       
+            printf("%d\t",*(*(p+i)+j)  );
+            
+        }
+         printf("\n");
+    }
+    free(p);
+}
+
+
+
+
+//二维数组 》》》指针数组 》》构造指向的数据
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stddef.h>
+void ** alloc2D_space(int unit_size,int row,int line)
+{
+   
+    void **pp = (void **)malloc(sizeof(void *)*row);
+    for( int i = 0; i<row; i++)
+    {
+        pp[i] = malloc(sizeof(unit_size*line));
+    }
+    return pp;
+}
+
+void freeSpace(int **pp,int row)
+{
+    for(int i = 0;i< row; i++)
+    {
+        free(pp[i]);
+    }   
+    free(pp);
+    
+}
+
+
+
+int main(int argc, char **argv) {
+    int row = 3;
+    int line = 4;
+    int**pp = (int **)alloc2D_space(sizeof(int),row,line);
+    if (pp == 0)
+    printf(" malloc err!");
+    
+    printf("%p\n",pp);//打印地址
+      
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0;j <line; j++)
+        {
+            *(*(pp+i)+j) = i+j;
+            printf("%d\t",pp[i][j]);
+        }
+        printf("\n");
+    }
+   freeSpace(pp,row);
+   pp =NULL;
+  printf("%p\n",pp);
+   return 0;
+}
+
+
+
+
+
+
